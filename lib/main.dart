@@ -5,6 +5,13 @@ import 'package:taskaty/core/theme/app_theme.dart';
 import 'package:taskaty/features/add-task/data/task_model.dart';
 import 'package:taskaty/features/splash_view.dart';
 
+//1) add to pubspec
+//2) init. hive
+//2) open your box (like table)
+// Stepp : register adabter (model) // to store object
+// create typeAdapter (annottion class and its fields)
+//3) get opened box
+//4) dealing with your box
 
 void main() async {
   await Hive.initFlutter();
@@ -20,12 +27,20 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: appLightTheme,
-      darkTheme: appDarkTheme,
-      themeMode: ThemeMode.light,
-      debugShowCheckedModeBanner: false,
-      home:  SplashView(),
+    return ValueListenableBuilder(
+      valueListenable: Hive.box('user').listenable(),
+      builder: (context, box, child) {
+        bool darkMode = box.get('darkMode', defaultValue: false);
+        return MaterialApp(
+          themeMode: darkMode ? ThemeMode.dark : ThemeMode.light,
+          // LIGHT
+          theme: AppThemes.appLightTheme,
+          // DARK
+          darkTheme: AppThemes.appDarkTheme,
+          debugShowCheckedModeBanner: false,
+          home: const SplashView(),
+        );
+      },
     );
   }
 }

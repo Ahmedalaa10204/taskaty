@@ -5,7 +5,6 @@ import 'package:taskaty/core/utils/text_styles.dart';
 import 'package:taskaty/core/widgets/custom_button.dart';
 import 'package:taskaty/features/add-task/presentation/view/add_task.dart';
 
-
 class TodayHeader extends StatelessWidget {
   const TodayHeader({
     super.key,
@@ -20,11 +19,15 @@ class TodayHeader extends StatelessWidget {
           children: [
             Text(
               DateFormat.yMMMd().format(DateTime.now()),
-              style: getTitleStyle(),
+              style: getTitleStyle(
+                context,
+              ),
             ),
             Text(
               'Today',
-              style: getTitleStyle(),
+              style: getTitleStyle(
+                context,
+              ),
             ),
           ],
         ),
@@ -34,7 +37,7 @@ class TodayHeader extends StatelessWidget {
           onPressed: () {
             pushTo(context, const AddTaskView());
           },
-          width: 145,
+          width: 140,
           height: 45,
         )
       ],
