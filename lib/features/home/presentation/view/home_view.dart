@@ -67,7 +67,7 @@ class _HomeViewState extends State<HomeView> {
                       }
                     }
 
-                   if (tasks.isEmpty) {
+                    if (tasks.isEmpty) {
                       return Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +75,6 @@ class _HomeViewState extends State<HomeView> {
                             Image.asset('assets/empty.png'),
                             const Gap(20),
                             const Text('No Tasks'),
-
                           ],
                         ),
                       );

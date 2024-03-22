@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -18,7 +19,7 @@ class _ProfileViewState extends State<ProfileView> {
     final theme = Theme.of(context).colorScheme;
 
     final box = Hive.box('user');
-    var darkMode = box.get('darkMode');
+    var darkMode = box.get('darkMode') ?? false;
     return Scaffold(
       appBar: AppBar(
         foregroundColor: AppColors.primary,
@@ -37,8 +38,8 @@ class _ProfileViewState extends State<ProfileView> {
         child: ValueListenableBuilder(
           valueListenable: Hive.box('user').listenable(),
           builder: (context, box, child) {
-            String path = box.get('image') ;
-            String name = box.get('name') ;
+            String path = box.get('image') ?? '';
+            String name = box.get('name') ?? '';
             return Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -48,7 +49,7 @@ class _ProfileViewState extends State<ProfileView> {
                     children: [
                       CircleAvatar(
                           radius: 80,
-                          backgroundImage: path.isNotEmpty
+                          backgroundImage: path != null
                               ? FileImage(File(path)) as ImageProvider
                               : const AssetImage('assets/user.png')),
                       Positioned(

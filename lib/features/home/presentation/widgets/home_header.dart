@@ -49,7 +49,7 @@ class _HomeHeaderState extends State<HomeHeader> {
         const Spacer(),
         InkWell(
           onTap: () {
-            pushTo  (context, const ProfileView());
+            pushTo(context, const ProfileView());
           },
           child: CircleAvatar(
             radius: 22,
